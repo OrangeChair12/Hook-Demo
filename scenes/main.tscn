@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyq0s2e8yieae"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_gc5bb"]
+[ext_resource type="PackedScene" uid="uid://cqc73qngd3o7e" path="res://Components/Entities/Player/player.tscn" id="1_jybpb"]
+[ext_resource type="PackedScene" uid="uid://refebcfqt7fh" path="res://Components/Components/HookablePoint/hookable_point.tscn" id="2_mwwma"]
+[ext_resource type="Texture2D" uid="uid://5xqrxi14rjnh" path="res://icon.svg" id="3_og182"]
+[ext_resource type="Script" path="res://scenes/HealthBar.gd" id="4_ev514"]
+[ext_resource type="Script" path="res://Components/Components/UI/HookRangeLabel.gd" id="5_2qcvh"]
+[ext_resource type="PackedScene" uid="uid://bpng2cnmh3626" path="res://Components/Components/HookablePoint/fall_hookable_point.tscn" id="5_n6xtb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urxlu"]
+size = Vector2(500, 20)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1tfb"]
+bg_color = Color(0.387865, 0.679234, 0.423257, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_gc5bb")
+
+[node name="Player" parent="." instance=ExtResource("1_jybpb")]
+position = Vector2(548, 443)
+collision_layer = 2
+range_lost_per_heal = 50
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform" type="StaticBody2D" parent="Platforms"]
+position = Vector2(563, 557)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(76, 484)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform2"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform2"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="Platform3" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1033, 484)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform3"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform3"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="Platform4" type="StaticBody2D" parent="Platforms"]
+position = Vector2(257, 639)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform4"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform4"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="Platform5" type="StaticBody2D" parent="Platforms"]
+position = Vector2(898, 639)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform5"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform5"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="Platform6" type="StaticBody2D" parent="Platforms"]
+position = Vector2(567, 639)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform6"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 0.25)
+texture = ExtResource("3_og182")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform6"]
+shape = SubResource("RectangleShape2D_urxlu")
+one_way_collision = true
+
+[node name="HookablePoint" parent="." instance=ExtResource("2_mwwma")]
+position = Vector2(501, 227)
+
+[node name="HookablePoint2" parent="." instance=ExtResource("2_mwwma")]
+position = Vector2(1026, 56)
+
+[node name="HookablePoint3" parent="." instance=ExtResource("2_mwwma")]
+position = Vector2(148, 207)
+
+[node name="fall_hookable_point" parent="." groups=["Hookable"] instance=ExtResource("5_n6xtb")]
+position = Vector2(655, 253)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_x1tfb")
+step = 1.0
+value = 50.0
+script = ExtResource("4_ev514")
+
+[node name="HookRangeLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Hook Range: 500"
+script = ExtResource("5_2qcvh")
