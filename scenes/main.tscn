@@ -97,16 +97,16 @@ shape = SubResource("RectangleShape2D_urxlu")
 one_way_collision = true
 
 [node name="HookablePoint" parent="." instance=ExtResource("2_mwwma")]
-position = Vector2(501, 227)
+position = Vector2(501, 402)
 
 [node name="HookablePoint2" parent="." instance=ExtResource("2_mwwma")]
-position = Vector2(1026, 56)
+position = Vector2(575, 258)
 
 [node name="HookablePoint3" parent="." instance=ExtResource("2_mwwma")]
-position = Vector2(148, 207)
+position = Vector2(148, 382)
 
 [node name="fall_hookable_point" parent="." groups=["Hookable"] instance=ExtResource("5_n6xtb")]
-position = Vector2(655, 253)
+position = Vector2(646, 105)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

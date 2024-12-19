@@ -1,20 +1,256 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqc73qngd3o7e"]
+[gd_scene load_steps=26 format=3 uid="uid://cqc73qngd3o7e"]
 
-[ext_resource type="Texture2D" uid="uid://5xqrxi14rjnh" path="res://icon.svg" id="1_gc1l4"]
 [ext_resource type="Script" path="res://Components/Entities/Player/player.gd" id="1_w2thd"]
+[ext_resource type="Texture2D" uid="uid://sq0c131e4tqq" path="res://Marto/Marto Idle to ready1.png" id="2_07004"]
+[ext_resource type="Texture2D" uid="uid://in76omyfv6it" path="res://Marto/Marto Ready R/Marto Idle to ready2.png" id="3_eq0vq"]
+[ext_resource type="Texture2D" uid="uid://dbn6yprrt848j" path="res://Marto/Marto Jump R/2024-12-16.png" id="3_kca0p"]
+[ext_resource type="Texture2D" uid="uid://dqrqpvyx6lqin" path="res://Marto/Marto Jump R/2024-12-17.png" id="4_fittu"]
+[ext_resource type="Texture2D" uid="uid://dvxtb25y4dtsc" path="res://Marto/Marto Ready R/Marto Idle to ready3.png" id="4_m30rt"]
+[ext_resource type="Texture2D" uid="uid://bftkynuakyeci" path="res://Marto/Marto Ready R/Marto Idle to ready4.png" id="5_vu35o"]
+[ext_resource type="Texture2D" uid="uid://b5ucnawrgab44" path="res://Marto/Marto Running R/Marto Running1.png" id="6_6cjbu"]
+[ext_resource type="Texture2D" uid="uid://bt7m3cfmtjhfh" path="res://Marto/Marto Running R/Marto Running2.png" id="7_vt5rg"]
+[ext_resource type="Texture2D" uid="uid://cbl7wj5gffhqc" path="res://Marto/Marto Running R/Marto Running3.png" id="8_n3h6r"]
+[ext_resource type="Texture2D" uid="uid://4klptrfxetq4" path="res://Marto/Marto Running R/Marto Running4.png" id="9_s717u"]
+[ext_resource type="Texture2D" uid="uid://ccnf1empvqs1s" path="res://Marto/Marto Running R/Marto Running5.png" id="10_q70oy"]
+[ext_resource type="Texture2D" uid="uid://38kt38adsa6m" path="res://Marto/Marto Running R/Marto Running6.png" id="11_8h2em"]
+[ext_resource type="Texture2D" uid="uid://bs8i4othr8oeq" path="res://Marto/Marto Running R/Marto Running7.png" id="12_buxy7"]
+[ext_resource type="Texture2D" uid="uid://d1c1h6et4qbpa" path="res://Marto/Marto Running R/Marto Running8.png" id="13_03glk"]
+[ext_resource type="Texture2D" uid="uid://clu57i3j8jk40" path="res://Marto/Marto Running R/Marto Running9.png" id="14_xwjv4"]
+[ext_resource type="Texture2D" uid="uid://c6yjrktewt7g8" path="res://Marto/Marto Running R/Marto Running10.png" id="15_w2cvp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0i73"]
-size = Vector2(60, 60)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v1084"]
+radius = 6.0
+height = 34.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3fmhm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_07004")
+}],
+"loop": true,
+"name": &"Idle_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kca0p")
+}, {
+"duration": 1e+06,
+"texture": ExtResource("4_fittu")
+}],
+"loop": true,
+"name": &"Jump_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eq0vq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m30rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vu35o")
+}],
+"loop": true,
+"name": &"Ready_R",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6cjbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vt5rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_n3h6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s717u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_q70oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8h2em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_buxy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_03glk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xwjv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_w2cvp")
+}],
+"loop": true,
+"name": &"Running_R",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_ari7d"]
+resource_name = "Idle_R"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ml0iq"]
+resource_name = "Jump_R"
+length = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.015),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_r4h3b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jvicg"]
+resource_name = "Ready_R"
+length = 0.18
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Ready_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_j5lvt"]
+resource_name = "Running_R"
+length = 0.66
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Running_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ph6ta"]
+_data = {
+"Idle_R": SubResource("Animation_ari7d"),
+"Jump_R": SubResource("Animation_ml0iq"),
+"RESET": SubResource("Animation_r4h3b"),
+"Ready_R": SubResource("Animation_jvicg"),
+"Running_R": SubResource("Animation_j5lvt")
+}
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 12
 script = ExtResource("1_w2thd")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_gc1l4")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_l0i73")
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_v1084")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3fmhm")
+animation = &"Idle_R"
+autoplay = "Idle_R"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ph6ta")
+}
+autoplay = "Idle_R"
+
+[node name="ReadyTimer" type="Timer" parent="."]
+wait_time = 0.18
