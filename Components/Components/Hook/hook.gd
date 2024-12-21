@@ -22,6 +22,8 @@ func _on_area_entered(area: Area2D):
 		target = area.get_parent()
 		target_pos = target.global_position
 		reachable = true
+	else:
+		reachable = false
 
 func shoot_towards(target_position: Vector2, hook_range: float):
 	target_pos = target_position  # Assign the hookable point
@@ -57,6 +59,7 @@ func _process(_delta):
 
 	# Update the visual position of the hook
 	set_point_position(1, hook_end.position)
+
 
 func hook_callback():
 	reached_hook = true
