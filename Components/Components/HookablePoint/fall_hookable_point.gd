@@ -20,7 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 signal hooked
-signal detached
+#signal detached
 
 func _ready():
 	# Create and configure the timer
@@ -29,8 +29,8 @@ func _ready():
 	timer.wait_time = fall_delay  # Set the delay time
 	timer.one_shot = true  # Ensure the timer only runs once
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	print(timer)
 	add_to_group("hookable")
-
 
 
 func get_distance():
@@ -48,7 +48,7 @@ func _physics_process(_delta):
 		if attached_hook != null and is_instance_valid(attached_hook):
 			attached_hook.hook_end.global_position = global_position
 
-func on_hooked():
+func on_fallen_hooked():
 	# Triggered when the player hooks onto this point
 	if !has_fallen:
 		timer.start()  # Start the fall delay timer

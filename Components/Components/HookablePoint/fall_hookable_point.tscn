@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://d35aem7dwan18" path="res://scenes/rock.png" id="2_rxd7y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_764h4"]
-radius = 16.0312
+radius = 29.0172
 
 [node name="fall_hookable_point" type="Marker2D"]
+z_index = 3
 script = ExtResource("1_06rqt")
 
 [node name="Rock" type="Sprite2D" parent="."]

@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bh6xvu0vjribu" path="res://scenes/Sprite-0001.png" id="2_outxk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8thc"]
-radius = 13.3417
+radius = 30.0
 
 [node name="HookablePoint" type="Marker2D" groups=["Hookable"]]
+z_index = 3
 script = ExtResource("1_nkqh2")
 
 [node name="Area2D" type="Area2D" parent="."]

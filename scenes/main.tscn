@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyq0s2e8yieae"]
+[gd_scene load_steps=11 format=3 uid="uid://dyq0s2e8yieae"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gc5bb"]
 [ext_resource type="PackedScene" uid="uid://cqc73qngd3o7e" path="res://Components/Entities/Player/player.tscn" id="1_jybpb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/HealthBar.gd" id="4_ev514"]
 [ext_resource type="Script" path="res://Components/Components/UI/HookRangeLabel.gd" id="5_2qcvh"]
 [ext_resource type="PackedScene" uid="uid://bpng2cnmh3626" path="res://Components/Components/HookablePoint/fall_hookable_point.tscn" id="5_n6xtb"]
+[ext_resource type="Texture2D" uid="uid://cowon3m7bvxau" path="res://UI/FMMA Game UI draft 3.png" id="6_7tann"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urxlu"]
 size = Vector2(500, 20)
@@ -100,19 +101,27 @@ one_way_collision = true
 position = Vector2(501, 402)
 
 [node name="HookablePoint2" parent="." instance=ExtResource("2_mwwma")]
-position = Vector2(575, 258)
+position = Vector2(574, 335)
 
 [node name="HookablePoint3" parent="." instance=ExtResource("2_mwwma")]
 position = Vector2(148, 382)
 
 [node name="fall_hookable_point" parent="." groups=["Hookable"] instance=ExtResource("5_n6xtb")]
-position = Vector2(646, 105)
+position = Vector2(717, 266)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(0, 305)
+transform = Transform2D(1, 0, 0, 1, 0, 305)
+
+[node name="FmmaGameUiDraft3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, -125)
+texture = ExtResource("6_7tann")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.0037, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -132,5 +141,5 @@ script = ExtResource("4_ev514")
 
 [node name="HookRangeLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Hook Range: 500"
+text = "Hook Range: 300"
 script = ExtResource("5_2qcvh")

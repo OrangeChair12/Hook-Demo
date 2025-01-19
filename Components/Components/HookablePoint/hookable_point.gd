@@ -1,8 +1,6 @@
 extends HookablePointBase
 class_name HookablePoint
 
-
-
 func _ready():
 	add_to_group("hookable")
 
