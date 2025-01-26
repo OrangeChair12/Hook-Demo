@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var health_gained_per_heal: int = 5
 @export var range_lost_per_heal: int = 20
-@export var hook_range = 100
+@export var hook_range = 300
 @export var acceleration: float = 1500.0  # How fast the player accelerates
 @export var deceleration: float = 1000.0  # How fast the player slows down
 @export var max_speed: float = 250.0      # Maximum running speed
@@ -96,14 +96,13 @@ func normal_state(_delta):
 		if Input.is_action_just_pressed("jump"):
 			jump_buffer_timer = jump_buffer_time
 
-		if is_on_floor() and !was_on_floor:
+		if is_on_floor():
 			if jump_buffer_timer > 0:
 				velocity.y = JUMP_VELOCITY
 				jump_buffer_timer = 0
 				anim.play("Jump_R")
 				jump_animation_played = true
 
-	was_on_floor = is_on_floor()
 
 	# Get the input direction and handle movement/deceleration
 	var direction = Input.get_axis("left", "right")
@@ -151,21 +150,14 @@ func normal_state(_delta):
 				if velocity.x == 0 and is_on_floor() and !is_standing_attack and !jump_animation_played:
 					if anim.current_animation != "Idle_R":
 						anim.play("Idle_R")  # Play the body animation
-
-
-
 	# Only allow hook if not attack sliding
 	if Input.is_action_just_pressed("hook") and !attack_slide_lock:
 		launch_hook()
-
 	if is_on_floor():
 		coyote_timer = coyote_time
 		jump_animation_played = false
 	else:
 		coyote_timer = max(coyote_timer - _delta, 0)
-	
-	
-	
 	move_and_slide()
 
 func _on_ready_timer_timeout():
