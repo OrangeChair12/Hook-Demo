@@ -2,32 +2,37 @@ extends Line2D
 class_name Hook
 
 signal finished_hooking
-const hook_speed := 800
+const hook_speed := 750
 
 @onready var hook_end: Marker2D = $HookEnd # Marker use to identify where is the line supposed to end.
 @onready var ray_cast: RayCast2D = $RayCast # Reference to the raycast
 
 var target: HookablePointBase = null #Hook point detected.
 var target_pos = Vector2.ZERO
+var is_retracting: bool = false
+var original_position: Vector2
+
 
 #STATES
 var reachable = true #Is the point inside the hook range?
 var reached_hook: bool = false #Has the hook reached a hookable target?
-
 var climb_ended: bool = false #Has the hook finished climbing to the point?
 
 func _ready():
 	width = 3  # Set line width to 1 pixel
 	antialiased = false  # Disable anti-aliasing
+	original_position = global_position
+
 
 func shoot_towards(target_position: Vector2, hook_range: float):
-	target_pos = target_position  # Assign the hookable point
+	var direction = (target_position - global_position).normalized()
+	target_pos = global_position + direction * min(global_position.distance_to(target_position), hook_range)  # Assign the hookable point
 	var tween: Tween = get_tree().create_tween()
 	var distance := global_position.distance_to(target_pos)
 	
 	if distance > hook_range:
 		var diff_vector = target_pos - global_position
-		target_pos = global_position + diff_vector.limit_length(hook_range)
+		target_pos = global_position + direction * hook_range
 		reachable = false
 	
 	#Use raycast to see if target is available
@@ -38,7 +43,6 @@ func shoot_towards(target_position: Vector2, hook_range: float):
 	var travel_time = distance / hook_speed
 	tween.tween_method(tweener_method, global_position, target_pos, travel_time)
 	tween.tween_callback(hook_callback)
-	var direction = target_pos - hook_end.global_position
 	hook_end.rotation = direction.angle()
 
 #Checks if the raycast collided with a Hookable point
@@ -74,6 +78,9 @@ func _process(_delta):
 			hook_end.global_position = target_pos
 	# Update the visual position of the hook
 	set_point_position(1, hook_end.position)
+	if is_retracting:
+		return  
+
 
 func falling_hook_func(_delta):
 	var rope_length = global_position.distance_to(hook_end.global_position)  # Calculate the rope length
@@ -98,25 +105,32 @@ func hook_callback():
 		finished_hooking.emit(reached_hook, hook_dir, hook_length, false)
 
 func detach_hook(_delta):
-	target = null  # Clear the target
-	reachable = false  # Mark the hook as unreachable
-	reached_hook = false  # Mark the hook as not reached
-	climb_ended = true  # End any climbing process
-	hook_end.global_position = global_position  # Reset hook to the player
-	set_process(false)  # Stop processing the hook mechanics
-	# Reset player's state to normal
-	#hook_retract()
+	target = null
+	reachable = false
+	reached_hook = false
+	climb_ended = true
+	# Instead of instantly resetting position, start retraction
+	hook_retract()
 	if get_parent() is Player:
 		var player = get_parent()
 		player.current_state = Player.STATES.NORMAL
-		player.velocity.y += player.gravity * _delta  # Apply gravity to ensure falling
-
+		player.velocity.y += player.gravity * _delta
 
 func hook_retract():
-	var player = get_parent()  # Get the parent player
-	var target_position = player.global_position  # Target position is the player's current position
-	# Start the tween to gradually move hook_end to the player's position
-	var tween = get_tree().create_tween()
-	tween.tween_property(hook_end, "global_position", target_position, 0.5)
-	# Optionally, you can set an event when the tween finishes
-	tween.connect("tween_completed", Callable(self, "_on_hook_retract_completed"))
+	if is_retracting:
+		return
+	is_retracting = true
+	var retract_start_pos = hook_end.global_position
+	var distance = retract_start_pos.distance_to(global_position)
+	var retract_time = distance / (hook_speed * 0.65)
+	
+	# Lock the target position to avoid interference
+	var locked_target_pos = global_position
+
+	var tween: Tween = create_tween()
+	tween.tween_method(func(pos):
+		hook_end.global_position = pos
+		set_point_position(1, hook_end.position)
+	, retract_start_pos, locked_target_pos, retract_time)
+	
+	tween.tween_callback(func(): queue_free())

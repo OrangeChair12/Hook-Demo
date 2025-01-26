@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqrqpvyx6lqin"
-path="res://.godot/imported/2024-12-17.png-6c08152dc335c8f158881ef5a3f4cab8.ctex"
+uid="uid://8qh8xrp5lpp7"
+path="res://.godot/imported/Marto Retract on ground2.png-93066c8e8139244c4c4d5dab52e4f506.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Marto/Marto Jump R/2024-12-17.png"
-dest_files=["res://.godot/imported/2024-12-17.png-6c08152dc335c8f158881ef5a3f4cab8.ctex"]
+source_file="res://Marto/Marto Retract on Ground R/Marto Retract on ground2.png"
+dest_files=["res://.godot/imported/Marto Retract on ground2.png-93066c8e8139244c4c4d5dab52e4f506.ctex"]
 
 [params]
 

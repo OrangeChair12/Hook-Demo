@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cowon3m7bvxau"
-path="res://.godot/imported/FMMA Game UI draft 3.png-50b241031cdc6abbb26e60ee9853ea4b.ctex"
+uid="uid://bl676evdns3vn"
+path="res://.godot/imported/Marto Jump1.png-a4a4325b8438c110dbd11ea8939c6186.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/FMMA Game UI draft 3.png"
-dest_files=["res://.godot/imported/FMMA Game UI draft 3.png-50b241031cdc6abbb26e60ee9853ea4b.ctex"]
+source_file="res://Marto/Marto Jump R/Marto Jump1.png"
+dest_files=["res://.godot/imported/Marto Jump1.png-a4a4325b8438c110dbd11ea8939c6186.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var health_gained_per_heal: int = 5
 @export var range_lost_per_heal: int = 20
-@export var hook_range = 500
+@export var hook_range = 100
 @export var acceleration: float = 1500.0  # How fast the player accelerates
 @export var deceleration: float = 1000.0  # How fast the player slows down
 @export var max_speed: float = 250.0      # Maximum running speed
@@ -33,12 +33,14 @@ var was_on_floor: bool = false
 var jump_animation_played = false
 var is_attack_sliding: bool = false
 var attack_slide_lock: bool = false
+var current_animation: String = ""
+var animation_locked: bool = false
 @onready var anim = get_node("AnimationPlayer")
 @onready var ready_timer = $ReadyTimer
 @onready var throw_timer = Timer.new()
 
 func _ready():
-	Global.player = self
+	#Global.player = self
 	if ready_timer == null:  # Ensures the timer is initialized
 		ready_timer = $ReadyTimer
 	ready_timer.connect("timeout", Callable(self, "_on_ready_timer_timeout"))
@@ -57,8 +59,12 @@ func _physics_process(delta):
 			climbing_state(delta)
 	if jump_buffer_timer > 0:
 		jump_buffer_timer -= delta
+	
 
 func normal_state(_delta):
+	if animation_locked:
+		move_and_slide()
+		return 
 	# First, handle attack slide state and locks
 	if attack_slide_lock:
 		velocity.x = move_toward(velocity.x, 0, attack_deceleration * _delta)
@@ -85,6 +91,7 @@ func normal_state(_delta):
 			anim.play("Jump_R")
 			jump_animation_played = true
 			coyote_timer = 0
+		
 
 		if Input.is_action_just_pressed("jump"):
 			jump_buffer_timer = jump_buffer_time
@@ -141,8 +148,11 @@ func normal_state(_delta):
 					if standing_attack_timer <= 0:
 						is_standing_attack = false
 						anim.play("Idle_R")
-				elif velocity.x == 0 and anim.current_animation != "Idle_R" and is_on_floor() and !is_standing_attack:
-					anim.play("Idle_R")
+				if velocity.x == 0 and is_on_floor() and !is_standing_attack and !jump_animation_played:
+					if anim.current_animation != "Idle_R":
+						anim.play("Idle_R")  # Play the body animation
+
+
 
 	# Only allow hook if not attack sliding
 	if Input.is_action_just_pressed("hook") and !attack_slide_lock:
@@ -150,60 +160,83 @@ func normal_state(_delta):
 
 	if is_on_floor():
 		coyote_timer = coyote_time
+		jump_animation_played = false
 	else:
 		coyote_timer = max(coyote_timer - _delta, 0)
-
+	
+	
+	
 	move_and_slide()
 
-
-
 func _on_ready_timer_timeout():
-	if velocity.x != 0:
+	if !animation_locked and velocity.x != 0:
 		anim.play("Running_R")
 		ready_timer.stop()
 
 func hooking_state(delta):
-	if not is_on_floor():
+	if is_on_floor():
+		if anim.current_animation != "Throw_on_ground_R":
+			animation_locked = true
+			anim.play("Throw_on_ground_R")
+			await anim.animation_finished
+			animation_locked = false
+			current_state = STATES.CLIMBING
+	else:
 		if anim.current_animation != "Throw_in_air_R":
 			anim.play("Throw_in_air_R")
 		velocity.y += gravity * delta
 		move_and_slide()
-	else:
-		if anim.current_animation != "Throw_on_ground_R":
-			anim.play("Throw_on_ground_R")
-			await anim.animation_finished
-			current_state = STATES.CLIMBING
 
 func climbing_state(_delta):
-	if !hook or !hook.target:
+	# Check if the hook exists and is valid
+	if !hook or !is_instance_valid(hook) or !hook.target:
+		if hook and is_instance_valid(hook) and !hook.is_retracting:
+			hook.hook_retract()
 		current_state = STATES.NORMAL
-		if hook:
-			hook.queue_free()
-			hook = null
 		return
+	
 	# Check if we've reached the hook point
 	var distance_to_target = global_position.distance_to(hook.target.global_position)
 	if hook.target is HookablePoint and distance_to_target <= 10:  # When close enough to the target
 		velocity = Vector2.ZERO  # Stop movement
+	
 	if Input.is_action_just_released("hook"):
 		current_state = STATES.NORMAL
-		hook.queue_free()
-		hook = null
+		if hook and is_instance_valid(hook) and !hook.is_retracting:
+			hook.hook_retract()
 		return
+	
 	move_and_slide()
+
 
 func launch_hook():
 	if !Global.selected_hook: return
+	
+	var mouse_position = get_global_mouse_position()
+	var distance_to_mouse = global_position.distance_to(mouse_position)
+	
+	# Check if the mouse position is within hook range
+	if distance_to_mouse > hook_range:
+		# Limit the hook to the maximum range
+		var direction = (mouse_position - global_position).normalized()
+		mouse_position = global_position + direction * hook_range
+	
 	hook = hook_scene.instantiate()
 	add_child(hook)
-	hook.shoot_towards(get_global_mouse_position(), hook_range)
+	hook.shoot_towards(mouse_position, hook_range)
 	hook.finished_hooking.connect(_on_hooking_finished)
 	current_state = STATES.HOOK
 
+
 func _on_hooking_finished(reached: bool, direction: Vector2, length: float, is_climbing: bool):
 	if !reached:
-		hook.queue_free()
+		hook.hook_retract()
+		if is_on_floor():
+			anim.play("Retract_on_ground_R")  # Then play retract
+		else:
+			anim.play("Retract_in_air_R")
 		current_state = STATES.NORMAL
+		#hook.queue_free()
 		return
 	# Special handling for normal hook points
 	var launch_power = min(SPEED * (length / 50), 650)

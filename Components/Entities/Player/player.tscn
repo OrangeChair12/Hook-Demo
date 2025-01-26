@@ -1,26 +1,31 @@
-[gd_scene load_steps=46 format=3 uid="uid://cqc73qngd3o7e"]
+[gd_scene load_steps=54 format=3 uid="uid://cqc73qngd3o7e"]
 
 [ext_resource type="Script" path="res://Components/Entities/Player/player.gd" id="1_w2thd"]
 [ext_resource type="Texture2D" uid="uid://sq0c131e4tqq" path="res://Marto/Marto Idle to ready1.png" id="2_07004"]
 [ext_resource type="Texture2D" uid="uid://cyvwjgvvn50uw" path="res://Marto/Marto Attack Standing R/Marto standing attackv2.png" id="2_jlnc8"]
+[ext_resource type="Texture2D" uid="uid://c0eiu4o0cm28f" path="res://Marto/Threader.png" id="2_vk51q"]
 [ext_resource type="Texture2D" uid="uid://in76omyfv6it" path="res://Marto/Marto Ready R/Marto Idle to ready2.png" id="3_eq0vq"]
-[ext_resource type="Texture2D" uid="uid://dbn6yprrt848j" path="res://Marto/Marto Jump R/2024-12-16.png" id="3_kca0p"]
 [ext_resource type="Texture2D" uid="uid://dmsr65r8w58y4" path="res://Marto/Marto Attack Standing R/Marto standing attackv3.png" id="3_l6yqu"]
-[ext_resource type="Texture2D" uid="uid://dqrqpvyx6lqin" path="res://Marto/Marto Jump R/2024-12-17.png" id="4_fittu"]
 [ext_resource type="Texture2D" uid="uid://dvxtb25y4dtsc" path="res://Marto/Marto Ready R/Marto Idle to ready3.png" id="4_m30rt"]
 [ext_resource type="Texture2D" uid="uid://4plhrf76ohfa" path="res://Marto/Marto Attack Standing R/Marto standing attackv4.png" id="4_qks7v"]
 [ext_resource type="Texture2D" uid="uid://btirho7lds03j" path="res://Marto/Marto Attack Standing R/Marto standing attackv5.png" id="5_6kuby"]
 [ext_resource type="Texture2D" uid="uid://bftkynuakyeci" path="res://Marto/Marto Ready R/Marto Idle to ready4.png" id="5_vu35o"]
 [ext_resource type="Texture2D" uid="uid://b5ucnawrgab44" path="res://Marto/Marto Running R/Marto Running1.png" id="6_6cjbu"]
 [ext_resource type="Texture2D" uid="uid://bt7m3cfmtjhfh" path="res://Marto/Marto Running R/Marto Running2.png" id="7_vt5rg"]
+[ext_resource type="Texture2D" uid="uid://bl676evdns3vn" path="res://Marto/Marto Jump R/Marto Jump1.png" id="8_cxgd4"]
 [ext_resource type="Texture2D" uid="uid://cbl7wj5gffhqc" path="res://Marto/Marto Running R/Marto Running3.png" id="8_n3h6r"]
+[ext_resource type="Texture2D" uid="uid://d0oiaikxq1a6s" path="res://Marto/Marto Jump R/Marto Jump2.png" id="9_4jiae"]
 [ext_resource type="Texture2D" uid="uid://4klptrfxetq4" path="res://Marto/Marto Running R/Marto Running4.png" id="9_s717u"]
 [ext_resource type="Texture2D" uid="uid://ccnf1empvqs1s" path="res://Marto/Marto Running R/Marto Running5.png" id="10_q70oy"]
 [ext_resource type="Texture2D" uid="uid://38kt38adsa6m" path="res://Marto/Marto Running R/Marto Running6.png" id="11_8h2em"]
 [ext_resource type="Texture2D" uid="uid://bs8i4othr8oeq" path="res://Marto/Marto Running R/Marto Running7.png" id="12_buxy7"]
 [ext_resource type="Texture2D" uid="uid://d1c1h6et4qbpa" path="res://Marto/Marto Running R/Marto Running8.png" id="13_03glk"]
+[ext_resource type="Texture2D" uid="uid://dvpb2tg6mccng" path="res://Marto/Marto Retract in air R/Marto Retract in air1.png" id="13_umapj"]
+[ext_resource type="Texture2D" uid="uid://b2de460piwjc0" path="res://Marto/Marto Retract in air R/Marto Retract in air2.png" id="14_10iu7"]
 [ext_resource type="Texture2D" uid="uid://clu57i3j8jk40" path="res://Marto/Marto Running R/Marto Running9.png" id="14_xwjv4"]
+[ext_resource type="Texture2D" uid="uid://couptse3x4dqb" path="res://Marto/Marto Retract on Ground R/Marto Retract on ground1.png" id="15_tmno2"]
 [ext_resource type="Texture2D" uid="uid://c6yjrktewt7g8" path="res://Marto/Marto Running R/Marto Running10.png" id="15_w2cvp"]
+[ext_resource type="Texture2D" uid="uid://8qh8xrp5lpp7" path="res://Marto/Marto Retract on Ground R/Marto Retract on ground2.png" id="16_utv6m"]
 [ext_resource type="Texture2D" uid="uid://75cspownr3jf" path="res://Marto/Marto Slide.png" id="18_qc21x"]
 [ext_resource type="Texture2D" uid="uid://cxnqb6mj2tftm" path="res://Marto/Marto step.png" id="18_yuwf4"]
 [ext_resource type="Texture2D" uid="uid://guld50k1dgqo" path="res://Marto/Marto Attack Slide R/Marto Slide attack1.png" id="19_pqlhm"]
@@ -59,18 +64,18 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_07004")
 }],
-"loop": true,
+"loop": false,
 "name": &"Idle_R",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_kca0p")
+"texture": ExtResource("8_cxgd4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_fittu")
+"texture": ExtResource("9_4jiae")
 }],
-"loop": true,
+"loop": false,
 "name": &"Jump_R",
 "speed": 5.0
 }, {
@@ -87,6 +92,28 @@ animations = [{
 "loop": true,
 "name": &"Ready_R",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_umapj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_10iu7")
+}],
+"loop": false,
+"name": &"Retract_in_air_R",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_tmno2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_utv6m")
+}],
+"loop": false,
+"name": &"Retract_on_ground_R",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -178,6 +205,8 @@ animations = [{
 "name": &"Throw_on_ground_R",
 "speed": 120.0
 }]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_51qhe"]
 
 [sub_resource type="Animation" id="Animation_2knj2"]
 resource_name = "Attack_standing_R"
@@ -305,6 +334,62 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_hxwel"]
+resource_name = "Retract_in_air_R"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Retract_in_air_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.065),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ox7j7"]
+resource_name = "Retract_on_ground_R"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Retract_on_ground_R"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.065),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_j5lvt"]
@@ -480,6 +565,8 @@ _data = {
 "Jump_R": SubResource("Animation_ml0iq"),
 "RESET": SubResource("Animation_r4h3b"),
 "Ready_R": SubResource("Animation_jvicg"),
+"Retract_in_air_R": SubResource("Animation_hxwel"),
+"Retract_on_ground_R": SubResource("Animation_ox7j7"),
 "Running_R": SubResource("Animation_j5lvt"),
 "Slide_R": SubResource("Animation_quog2"),
 "Sliding_attack_R": SubResource("Animation_53efy"),
@@ -510,11 +597,17 @@ drag_bottom_margin = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
+[node name="Threader" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_vk51q")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3fmhm")
-animation = &"Attack_standing_R"
-autoplay = "Idle_R"
+animation = &"Retract_on_ground_R"
 frame = 1
+
+[node name="Left arm sprites" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_51qhe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

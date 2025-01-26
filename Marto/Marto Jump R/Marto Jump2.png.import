@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbn6yprrt848j"
-path="res://.godot/imported/2024-12-16.png-82d8dace45031a45a5ec31efe6ce4861.ctex"
+uid="uid://d0oiaikxq1a6s"
+path="res://.godot/imported/Marto Jump2.png-0853b434f8f633afe489bc3b646da83d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Marto/Marto Jump R/2024-12-16.png"
-dest_files=["res://.godot/imported/2024-12-16.png-82d8dace45031a45a5ec31efe6ce4861.ctex"]
+source_file="res://Marto/Marto Jump R/Marto Jump2.png"
+dest_files=["res://.godot/imported/Marto Jump2.png-0853b434f8f633afe489bc3b646da83d.ctex"]
 
 [params]
 

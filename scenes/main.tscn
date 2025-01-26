@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyq0s2e8yieae"]
+[gd_scene load_steps=10 format=3 uid="uid://dyq0s2e8yieae"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gc5bb"]
 [ext_resource type="PackedScene" uid="uid://cqc73qngd3o7e" path="res://Components/Entities/Player/player.tscn" id="1_jybpb"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scenes/HealthBar.gd" id="4_ev514"]
 [ext_resource type="Script" path="res://Components/Components/UI/HookRangeLabel.gd" id="5_2qcvh"]
 [ext_resource type="PackedScene" uid="uid://bpng2cnmh3626" path="res://Components/Components/HookablePoint/fall_hookable_point.tscn" id="5_n6xtb"]
-[ext_resource type="Texture2D" uid="uid://cowon3m7bvxau" path="res://UI/FMMA Game UI draft 3.png" id="6_7tann"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urxlu"]
 size = Vector2(500, 20)
@@ -21,7 +20,6 @@ script = ExtResource("1_gc5bb")
 [node name="Player" parent="." instance=ExtResource("1_jybpb")]
 position = Vector2(548, 443)
 collision_layer = 2
-range_lost_per_heal = 50
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -113,14 +111,10 @@ position = Vector2(717, 266)
 offset = Vector2(0, 305)
 transform = Transform2D(1, 0, 0, 1, 0, 305)
 
-[node name="FmmaGameUiDraft3" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(320, -125)
-texture = ExtResource("6_7tann")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -305.0
+offset_right = 260.0
+offset_bottom = -251.0
 scale = Vector2(1.0037, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
