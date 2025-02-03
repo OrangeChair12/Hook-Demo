@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cqc73qngd3o7e"]
+[gd_scene load_steps=53 format=3 uid="uid://cqc73qngd3o7e"]
 
 [ext_resource type="Script" path="res://Components/Entities/Player/player.gd" id="1_w2thd"]
 [ext_resource type="Texture2D" uid="uid://sq0c131e4tqq" path="res://Marto/Marto Idle to ready1.png" id="2_07004"]
@@ -205,8 +205,6 @@ animations = [{
 "name": &"Throw_on_ground_R",
 "speed": 120.0
 }]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_51qhe"]
 
 [sub_resource type="Animation" id="Animation_2knj2"]
 resource_name = "Attack_standing_R"
@@ -605,9 +603,6 @@ texture = ExtResource("2_vk51q")
 sprite_frames = SubResource("SpriteFrames_3fmhm")
 animation = &"Retract_on_ground_R"
 frame = 1
-
-[node name="Left arm sprites" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_51qhe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

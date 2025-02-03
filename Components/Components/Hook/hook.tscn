@@ -15,7 +15,7 @@ script = ExtResource("1_c8wva")
 [node name="HookEnd" type="Marker2D" parent="."]
 
 [node name="Threader" type="Sprite2D" parent="HookEnd"]
-position = Vector2(12, -3)
+position = Vector2(22, -3)
 texture = ExtResource("2_17yon")
 
 [node name="RayCast" type="RayCast2D" parent="."]

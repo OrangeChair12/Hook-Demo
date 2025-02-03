@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var health_gained_per_heal: int = 5
 @export var range_lost_per_heal: int = 20
-@export var hook_range = 300
+@export var hook_range = 150
 @export var acceleration: float = 1500.0  # How fast the player accelerates
 @export var deceleration: float = 1000.0  # How fast the player slows down
 @export var max_speed: float = 250.0      # Maximum running speed
@@ -35,7 +35,7 @@ var is_attack_sliding: bool = false
 var attack_slide_lock: bool = false
 var current_animation: String = ""
 var animation_locked: bool = false
-@onready var anim = get_node("AnimationPlayer")
+@onready var anim : AnimationPlayer = get_node("AnimationPlayer")
 @onready var ready_timer = $ReadyTimer
 @onready var throw_timer = Timer.new()
 
@@ -102,6 +102,12 @@ func normal_state(_delta):
 				jump_buffer_timer = 0
 				anim.play("Jump_R")
 				jump_animation_played = true
+	
+	if Input.is_action_just_pressed("healup"):
+		health += health_gained_per_heal
+		hook_range -= range_lost_per_heal
+		Global.health_updated.emit(health)
+		Global.hook_range_updated.emit(hook_range)
 
 
 	# Get the input direction and handle movement/deceleration
@@ -172,7 +178,7 @@ func hooking_state(delta):
 			anim.play("Throw_on_ground_R")
 			await anim.animation_finished
 			animation_locked = false
-			current_state = STATES.CLIMBING
+			#current_state = STATES.CLIMBING
 	else:
 		if anim.current_animation != "Throw_in_air_R":
 			anim.play("Throw_in_air_R")
@@ -208,10 +214,10 @@ func launch_hook():
 	var distance_to_mouse = global_position.distance_to(mouse_position)
 	
 	# Check if the mouse position is within hook range
-	if distance_to_mouse > hook_range:
-		# Limit the hook to the maximum range
-		var direction = (mouse_position - global_position).normalized()
-		mouse_position = global_position + direction * hook_range
+	#if distance_to_mouse > hook_range:
+		## Limit the hook to the maximum range
+		#var direction = (mouse_position - global_position).normalized()
+		#mouse_position = global_position + direction * hook_range
 	
 	hook = hook_scene.instantiate()
 	add_child(hook)
